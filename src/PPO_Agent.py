@@ -8,7 +8,6 @@ from sapai import *
 from sapai.shop import *
 from image_detection import *
 from makeActions import *
-import tkinter as tk
 import keyboard
 
 def pause():
@@ -25,6 +24,7 @@ def get_action_name(k: int) -> str:
     for (start_name, _), (end_name, end_val) in zip(name_val[:-1], name_val[1:]):
         if k < end_val:
             return start_name
+    else:
         return end_name
 
 def remove_nothing(pet_list):
@@ -49,6 +49,7 @@ def run():
 
     num_turns = 20
     while num_turns:
+        pause()
         pets, _ = find_the_animals(directory = '.\\SAP_res\\')
         pets = remove_nothing(pets)
         env.player.shop = Shop(pets)
@@ -60,14 +61,33 @@ def run():
         s = env._avail_actions()
         # print(s[action][1:])
         pause()
-        action_dict[get_action_name(action)](s[action][1:])
+        print("Action")
+        print(action)
+        print(get_action_name(action))
+        print(s[action][0])
+        print(s[action][1:])
+        if env._is_valid_action(action):
+            if get_action_name(action) == 'buy_food':
+                num_pets = 0
+                num_food = 0
+                for shop_slot in env.player.shop:
+                    if shop_slot.slot_type == "pet":
+                        num_pets += 1
+                    if shop_slot.slot_type == "food":
+                        num_food += 1
+                action_dict[get_action_name(action)](s[action][1:], num_pets - num_food%2)
+            else:
+                if get_action_name(action) == 'roll':
+                    action_dict[get_action_name(action)]()
+                else:
+                    action_dict[get_action_name(action)](s[action][1:])
         obs, reward, done, info = env.step(action)
         if get_action_name(action) == 'end_turn':
             num_turns -= 1
             pause()
-        if done:
-            obs = env.reset()
-            break
+        # if done:
+        #     obs = env.reset()
+        #     break
     print(s[action][0])
     env.close()
 

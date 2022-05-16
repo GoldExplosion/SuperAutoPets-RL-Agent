@@ -2,12 +2,10 @@ import pyautogui as gui
 import cv2 as cv
 import numpy as np
 from PIL import ImageGrab, Image, ImageChops
-import time 
 import os
 # class superAutoPets_CV():
 #     def __init__(self):
 def get_animal_from_screen():
-    # time.sleep(1)
     img = ImageGrab.grab(bbox=(450, 620, 1500, 750))
     img_00 = img.crop((10,0,140,130))
     img_01 = img.crop((155,0,285,130))
@@ -20,18 +18,13 @@ def get_animal_from_screen():
     images = []
     for i in images0:
         images.append(cv.cvtColor(np.array(i), cv.COLOR_RGB2BGR))
-    # img_00 = img_00.save(r'C:\Users\jivit\Documents\Python_Scripts\RL\image classification\tool_res\first.jpg')
-    # img_01 = img_01.save(r'C:\Users\jivit\Documents\Python_Scripts\RL\image classification\tool_res\second.jpg')
-    # img_02 = img_02.save(r'C:\Users\jivit\Documents\Python_Scripts\RL\image classification\tool_res\third.jpg')
-    # img_03 = img_03.save(r'C:\Users\jivit\Documents\Python_Scripts\RL\image classification\tool_res\fourth.jpg')
-    # img_04 = img_04.save(r'C:\Users\jivit\Documents\Python_Scripts\RL\image classification\tool_res\fiveth.jpg')
     return images, images0
 
 def matching(image, needle_img):
     result = cv.matchTemplate(image,needle_img, cv.TM_CCOEFF_NORMED)
     _, max_val, _, _ = cv.minMaxLoc(result)
     # print(max_val)
-    if max_val > 0.5:
+    if max_val > 0.7:
         return 1
     return 0
 
@@ -42,9 +35,7 @@ def get_image_directory(directory):
     for folder in dir:
         for filename in os.listdir(os.path.join(directory, folder)):
             file = os.path.join(folder, filename)
-            # print(file)
             if os.path.isfile(os.path.join(directory,file)):
-                # print(file)
                 yield os.path.join(directory,file)
 
 def find_the_animals(directory = '.\\SAP_res\\'):
@@ -69,9 +60,4 @@ def find_the_animals(directory = '.\\SAP_res\\'):
     references = tuple(references)
     if len(list_of_animals1) == 0:
         return list_of_animals1
-   
-        # img_01 = img_01.save(r'C:\Users\jivit\Documents\Python_Scripts\RL\image classification\tool_res\second.jpg')
-        # img_02 = img_02.save(r'C:\Users\jivit\Documents\Python_Scripts\RL\image classification\tool_res\third.jpg')
-        # img_03 = img_03.save(r'C:\Users\jivit\Documents\Python_Scripts\RL\image classification\tool_res\fourth.jpg')
-        # img_04 = img_04.save(r'C:\Users\jivit\Documents\Python_Scripts\RL\image classification\tool_res\fiveth.jpg')
     return list_of_animals1, references
