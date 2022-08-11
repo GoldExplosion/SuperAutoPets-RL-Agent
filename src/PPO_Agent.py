@@ -91,5 +91,3 @@ def run():
     print(s[action][0])
     env.close()
 
-pause()
-run()
