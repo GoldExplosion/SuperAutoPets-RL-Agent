@@ -13,3 +13,10 @@ The RL Model is a MaskablePPO implementation using stable baselines 3. This mode
 
 ## 3. Model2Game interface
 The Model2Game interface is used to convert the output of the model to mouse movements and clicks. This is implemented using pyautogui.
+
+# Training Metrics
+
+## Average Mean Reward
+![Average Mean Reward](assets\avg_mean_reward.png)
+## Average Number of Actions Per Game
+![Average Number of Actions](assets\no_of_actions.png)
