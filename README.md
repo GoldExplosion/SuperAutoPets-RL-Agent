@@ -17,6 +17,13 @@ The Model2Game interface is used to convert the output of the model to mouse mov
 # Training Metrics
 
 ## Average Mean Reward
-![Average Mean Reward](assets\avg_mean_reward.png)
+
+<p align="left">
+  <img src="assets\avg_mean_reward.png" width="50%" alt='Average Mean Reward'>
+</p>
+
 ## Average Number of Actions Per Game
-![Average Number of Actions](assets\no_of_actions.png)
+
+<p align="left">
+  <img src="assets\no_of_actions.png" width="50%" alt='Average Number of Actions Per Game'>
+</p>
